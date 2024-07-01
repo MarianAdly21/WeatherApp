@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/view/search_view.dart';
 import 'package:weather_app/widgets/no_weather_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -10,7 +11,15 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SearchView();
+                  },
+                ),
+              );
+            },
             icon: Icon(Icons.search),
             color: Colors.white,
           ),
