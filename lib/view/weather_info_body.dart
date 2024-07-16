@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/model/weather_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 
 class WeatherInfoBody extends StatelessWidget {
-  const WeatherInfoBody({
-    super.key,
-  });
+  const WeatherInfoBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var weatherModel = BlocProvider.of<GetWeatherCubit>(context).weatherModel;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
@@ -16,41 +16,41 @@ class WeatherInfoBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "cairo",
-            style: TextStyle(
+            weatherModel.cityName,
+            style:const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32,
             ),
           ),
           Text(
-            "Update at 23:70",
-            style: TextStyle(
+            "Update at ${weatherModel.date.hour}:${weatherModel.date.minute}",
+            style:const TextStyle(
               fontSize: 24,
             ),
           ),
           Row(
             children: [
-              Image.asset('assets/clear.png'),
-              Spacer(),
+              Image.network("https:${weatherModel.image!}"),
+             const Spacer(),
               Text(
-                "12",
-                style: TextStyle(
+                weatherModel.temp.toString(),
+                style:const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Spacer(),
+             const Spacer(),
               Column(
                 children: [
                   Text(
-                    "maxTamp:70",
-                    style: TextStyle(
+                    "maxTamp:${weatherModel.maxTemp.round()}",
+                    style:const TextStyle(
                       fontSize: 20,
                     ),
                   ),
                   Text(
-                    "minTamp:70",
-                    style: TextStyle(
+                    "minTamp:${weatherModel.minTemp.round()}",
+                    style:const TextStyle(
                       fontSize: 20,
                     ),
                   ),
@@ -59,8 +59,8 @@ class WeatherInfoBody extends StatelessWidget {
             ],
           ),
           Text(
-            "Light Rain",
-            style: TextStyle(
+            weatherModel.weatherState,
+            style:const TextStyle(
               fontSize: 32,
             ),
           ),
