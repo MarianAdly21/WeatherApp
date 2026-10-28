@@ -12,11 +12,10 @@ class WeatherService {
     try {
       Response response = await dio
           .get('$baseUrl/forecast.json?key=$apiKey&q=$cityName&days=10');
-
       WeatherModel weatherModel = WeatherModel.fromJson(response.data);
-
       return weatherModel;
     } on DioException catch (e) {
+      log(e.toString());
       final String errorMessage = e.response?.data["error"]["message"] ??
           "Oops there was an error, try later";
       throw Exception(errorMessage);

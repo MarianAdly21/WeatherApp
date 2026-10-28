@@ -19,17 +19,17 @@ class HomeView extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return SearchView();
+                    return const SearchView();
                   },
                 ),
               );
             },
-            icon: Icon(Icons.search),
+            icon:const Icon(Icons.search),
             color: Colors.white,
           ),
         ],
         backgroundColor: Colors.blue,
-        title: Text(
+        title:const Text(
           "Weather App",
           style: TextStyle(
             color: Colors.white,
@@ -41,11 +41,11 @@ class HomeView extends StatelessWidget {
       body:
           BlocBuilder<GetWeatherCubit, WeatherState>(builder: (context, state) {
         if (state is WeatherInitialState) {
-          return NoWeatherBody();
+          return const NoWeatherBody();
         } else if (state is WeatherLoadedState) {
-          return WeatherInfoBody();
+          return const WeatherInfoBody();
         } else {
-          return Text('opps there was an error ');
+          return const Text('opps there was an error ');
         }
       }),
     );
